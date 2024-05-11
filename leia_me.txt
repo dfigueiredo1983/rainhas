@@ -1,0 +1,14 @@
+﻿com o g++ e o make e demais programas instalados 
+digite "make" neste diretório 
+
+install valgrind
+snap install valgrind --classic
+
+install gdb
+sudo apt-get install gdb
+
+cppcheck
+sudo snap install cppcheck
+
+cpplint
+sudo apt install cpplint
