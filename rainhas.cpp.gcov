@@ -9,22 +9,22 @@
         -:    8:
         -:    9:using namespace std;
         -:   10:
-        1:   11:int valida_arquivo_entrada(const std::string &filename)
+        3:   11:int valida_arquivo_entrada(const std::string &filename)
         -:   12:{
-        1:   13:  ifstream file(filename);
-        1:   14:  if (!file)
-    #####:   15:    return -2;
+        3:   13:  ifstream file(filename);
+        3:   14:  if (!file)
+        1:   15:    return -1;
         -:   16:
-        1:   17:  return 0;
-        1:   18:}
+        2:   17:  return 0;
+        3:   18:}
         -:   19:
-        1:   20:int rainhas(const std::string &filename)
+        3:   20:int rainhas(const std::string &filename)
         -:   21:{
         -:   22:
-        1:   23:  int valida_arquivo = valida_arquivo_entrada(filename);
+        3:   23:  int valida_arquivo = valida_arquivo_entrada(filename);
         -:   24:
-        1:   25:  if (valida_arquivo == -2)
-    #####:   26:    return -2;
+        3:   25:  if (valida_arquivo == -1)
+        1:   26:    return -1;
         -:   27:
-        1:   28:  return 0;
+        2:   28:  return 0;
         -:   29:}

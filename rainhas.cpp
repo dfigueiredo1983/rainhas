@@ -12,7 +12,7 @@ int valida_arquivo_entrada(const std::string &filename)
 {
   ifstream file(filename);
   if (!file)
-    return -2;
+    return -1;
 
   return 0;
 }
@@ -22,8 +22,8 @@ int rainhas(const std::string &filename)
 
   int valida_arquivo = valida_arquivo_entrada(filename);
 
-  if (valida_arquivo == -2)
-    return -2;
+  if (valida_arquivo == -1)
+    return -1;
 
   return 0;
 }

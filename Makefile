@@ -11,10 +11,10 @@ test: testa_rainhas
 	
 cpplint: testa_rainhas.cpp   rainhas.cpp rainhas.hpp
 	cpplint   --exclude=catch.hpp  *.*
-	
+
 gcov: testa_rainhas.cpp   rainhas.cpp rainhas.hpp 
 	g++ -std=c++11 -Wall -Wall -fprofile-arcs -ftest-coverage -c rainhas.cpp
-	g++ -std=c++11 -Wall -fprofile-arcs -ftest-coverage rainhas.o testa_rainhas.cpp -o testa_rainhas
+	g++ -std=c++11 -Wall -fprofile-arcs -ftest-coverage rainhas.o testa_rainhas.cpp -o testa_rainhas -lgcov
 	./testa_rainhas
 	gcov *.cpp	
 	
@@ -22,8 +22,7 @@ debug: testa_rainhas.cpp   rainhas.cpp rainhas.hpp
 	g++ -std=c++11 -Wall -Wall -g -c rainhas.cpp
 	g++ -std=c++11 -Wall  -g rainhas.o testa_rainhas.cpp -o testa_rainhas
 	gdb testa_rainhas
-	
-	
+		
 cppcheck: testa_rainhas.cpp   rainhas.cpp rainhas.hpp
 	cppcheck  --enable=warning . 
 
