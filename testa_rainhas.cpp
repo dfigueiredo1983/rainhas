@@ -13,3 +13,8 @@ TEST_CASE("Arquivos de entrada tem caracteres validos", "[rainhas]")
     REQUIRE(rainhas("tabuleiros/caracter_valido.txt") == 0);
     REQUIRE(rainhas("tabuleiros/caracter_invalido.txt") == -1);
 }
+
+TEST_CASE("Arquivos de entrada tem valores diferentes de 0 ou 1", "[rainhas]")
+{
+    REQUIRE(rainhas("tabuleiros/numero_invalido.txt") == -1);
+}
