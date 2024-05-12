@@ -19,6 +19,9 @@ int valida_arquivo_entrada(const std::string &filename)
   {
     if (isalpha(caractere))
       return -1;
+
+    if (isdigit(caractere) && !(caractere == '0' || caractere == '1'))
+      return -1;
   }
 
   return 0;
