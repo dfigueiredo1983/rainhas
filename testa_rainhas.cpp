@@ -4,5 +4,6 @@
 
 TEST_CASE("Arquivos de entrada validos", "[rainhas]")
 {
-    REQUIRE(rainhas("teste_valido.txt") == 0);
+    REQUIRE(rainhas("tabuleiros/teste_valido.txt") == 0);
+    REQUIRE(rainhas("tabuleiros/teste_valido_1.txt") == 0);
 }
