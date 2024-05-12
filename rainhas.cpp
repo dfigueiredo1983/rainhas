@@ -14,6 +14,13 @@ int valida_arquivo_entrada(const std::string &filename)
   if (!file)
     return -1;
 
+  char caractere;
+  while (file.get(caractere))
+  {
+    if (isalpha(caractere))
+      return -1;
+  }
+
   return 0;
 }
 
