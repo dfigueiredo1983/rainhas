@@ -68,26 +68,17 @@ int game(const std::string &filename)
   file.close();
 
   int numRainhasLinha = 0; // verifica rainha nas linhas
-  for (size_t i = 0; i < tabuleiro.size(); i++)
+  for (int i = 0; i < 8; i++)
   {
-    if (i % 8 == 0)
+    int acc = i * 8;
+    for (int j = acc; j < acc + 8; j++)
     {
-      numRainhasLinha = 0;
+      if (tabuleiro.at(j) == 1)
+        numRainhasLinha++;
+
+      if (numRainhasLinha > 1)
+        return -1;
     }
-
-    if (tabuleiro.at(i) == 1)
-      numRainhasLinha++;
-
-    if (numRainhasLinha > 1)
-      return -1;
-  }
-
-  int numRainhasColuna = 0; // verifica rainha nas linhas
-  for (size_t i = 0; i < tabuleiro.size(); i++)
-  {
-    if (i % 8 == 0)
-      cout << endl;
-    cout << tabuleiro.at(i);
   }
 
   return 0;
