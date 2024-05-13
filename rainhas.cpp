@@ -70,22 +70,19 @@ int game(const std::string &filename)
   int numRainhasLinha = 0;
   for (size_t i = 0; i < tabuleiro.size(); i++)
   {
-
-    cout << tabuleiro.at(i);
-    if (tabuleiro.at(i) == 1)
-      numRainhasLinha++;
-
-    if (numRainhasLinha > 1)
-    {
-      cout << "Linha com mais de 1 rainha: " << numRainhasLinha << endl;
-      return -1;
-    }
-
-    if (i % 7 == 0)
+    if (i % 8 == 0)
     {
       numRainhasLinha = 0;
       cout << endl;
     }
+
+    if (tabuleiro.at(i) == 1)
+      numRainhasLinha++;
+
+    if (numRainhasLinha > 1)
+      return -1;
+
+    cout << tabuleiro.at(i);
   }
 
   return 0;
