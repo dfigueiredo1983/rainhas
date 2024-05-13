@@ -27,31 +27,20 @@ int valida_arquivo_entrada(const std::string &filename)
   return 0;
 }
 
-int valida_linhas(const std::string &filename)
+int valida_linhas_colunas(const std::string &filename)
 {
   ifstream file(filename);
   string line;
   int nLine = 0;
   while (getline(file, line))
   {
+    if (line.length() != 8)
+      return -1;
     nLine++;
   }
 
   if (nLine != 8)
     return -1;
-
-  return 0;
-}
-
-int valida_colunas(const std::string &filename)
-{
-  ifstream file(filename);
-  string line;
-  int nColumn = 0;
-  while (getline(file, line))
-  {
-    cout << line.length() << endl;
-  }
 
   return 0;
 }
@@ -62,7 +51,7 @@ int rainhas(const std::string &filename)
   if (valida_arquivo == -1)
     return -1;
 
-  int linhas = valida_linhas(filename);
+  int linhas = valida_linhas_colunas(filename);
   if (linhas == -1)
     return -1;
 
