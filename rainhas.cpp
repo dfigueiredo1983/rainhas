@@ -43,6 +43,19 @@ int valida_linhas(const std::string &filename)
   return 0;
 }
 
+int valida_colunas(const std::string &filename)
+{
+  ifstream file(filename);
+  string line;
+  int nColumn = 0;
+  while (getline(file, line))
+  {
+    cout << line.length() << endl;
+  }
+
+  return 0;
+}
+
 int rainhas(const std::string &filename)
 {
   int valida_arquivo = valida_arquivo_entrada(filename);
