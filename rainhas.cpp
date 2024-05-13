@@ -24,6 +24,22 @@ int valida_arquivo_entrada(const std::string &filename)
       return -1;
   }
 
+  string line;
+  int nLine = 0;
+  while (getline(file, line))
+  {
+    nLine++;
+  }
+
+  if (nLine != 8)
+    return -1;
+
+  return 0;
+}
+
+int game(const std::string &filename)
+{
+
   return 0;
 }
 
