@@ -45,6 +45,14 @@ int valida_linhas_colunas(const std::string &filename)
   return 0;
 }
 
+int game(const std::string &filename)
+{
+
+  ifstream file(filename);
+
+  return 0;
+}
+
 int rainhas(const std::string &filename)
 {
   int valida_arquivo = valida_arquivo_entrada(filename);
