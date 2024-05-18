@@ -64,7 +64,6 @@ int game(const std::string &filename)
     }
     j++;
   }
-
   file.close();
 
   int nao_solucao = 1;
@@ -83,8 +82,6 @@ int game(const std::string &filename)
     numRainhasLinha = 0;
   }
 
-  std::cout << std::endl;
-
   int numRainhasColuna = 0; // verifica rainha na mesma coluna
   for (int i = 0; i < 8; i++)
   {
@@ -99,6 +96,27 @@ int game(const std::string &filename)
       j += 8;
     }
     numRainhasColuna = 0;
+  }
+
+  // rainhas na mesma diagonal
+  for (int i = 0; i < 8; i++)
+  {
+    for (int j = 0; j < 8; j++)
+    {
+      if (tabuleiro[i][j] == 1)
+      {
+        if (i == j) // (0,0), (1,1) ....
+        {
+          for (int n = i; n < 8; n++)
+          {
+            if (tabuleiro[n][n] == tabuleiro[i][j])
+            {
+              std::cout << "Duas rainhas na mesma diagonal" << std::endl;
+            }
+          }
+        }
+      }
+    }
   }
 
   return nao_solucao;

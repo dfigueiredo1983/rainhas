@@ -24,11 +24,11 @@ TEST_CASE("Arquivos de entrada tem rainhas na mesma linha", "[rainhas]")
     REQUIRE(rainhas("tabuleiros/rainhas_mesma_linha_2.txt") == 0);
 }
 
-// TEST_CASE("Arquivos de entrada tem rainhas na mesma coluna", "[rainhas]")
-// {
-//     REQUIRE(rainhas("tabuleiros/rainhas_mesma_coluna_1.txt") == 0);
-//     REQUIRE(rainhas("tabuleiros/rainhas_mesma_coluna_2.txt") == 0);
-// }
+TEST_CASE("Arquivos de entrada tem rainhas na mesma coluna", "[rainhas]")
+{
+    REQUIRE(rainhas("tabuleiros/rainhas_mesma_coluna_1.txt") == 0);
+    REQUIRE(rainhas("tabuleiros/rainhas_mesma_coluna_2.txt") == 0);
+}
 
 // TEST_CASE("Arquivos de entrada tem rainhas na mesma diagonal principal", "[rainhas]")
 // {

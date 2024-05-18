@@ -9,105 +9,102 @@
         -:    8:#include <vector>
         -:    9:#include <sstream>
         -:   10:
-       10:   11:int valida_arquivo_entrada(const std::string &filename)
+       12:   11:int valida_arquivo_entrada(const std::string &filename)
         -:   12:{
-       10:   13:  std::ifstream file(filename);
-       10:   14:  if (!file)
+       12:   13:  std::ifstream file(filename);
+       12:   14:  if (!file)
         1:   15:    return -1;
         -:   16:
         -:   17:  char caractere;
-        9:   18:  int numColunas = 0;
-        9:   19:  int numLinhas = 0;
-      499:   20:  while (file.get(caractere))
+       11:   18:  int numColunas = 0;
+       11:   19:  int numLinhas = 0;
+      643:   20:  while (file.get(caractere))
         -:   21:  {
-      494:   22:    if (isalpha(caractere))
+      636:   22:    if (isalpha(caractere))
         1:   23:      return -1;
         -:   24:
-      493:   25:    if (isdigit(caractere) && !(caractere == '0' || caractere == '1'))
+      635:   25:    if (isdigit(caractere) && !(caractere == '0' || caractere == '1'))
         1:   26:      return -1;
         -:   27:
-      492:   28:    if (caractere == '\n')
+      634:   28:    if (caractere == '\n')
         -:   29:    {
-       49:   30:      if (numColunas != 8)
+       63:   30:      if (numColunas != 8)
         2:   31:        return -1;
         -:   32:
-       47:   33:      numColunas = 0;
-       47:   34:      numLinhas++;
+       61:   33:      numColunas = 0;
+       61:   34:      numLinhas++;
         -:   35:    }
         -:   36:    else
         -:   37:    {
-      443:   38:      ++numColunas;
+      571:   38:      ++numColunas;
         -:   39:    }
         -:   40:  }
         -:   41:
-        5:   42:  if (numLinhas != 7)
+        7:   42:  if (numLinhas != 7)
         1:   43:    return -1;
         -:   44:
-        4:   45:  file.close();
+        6:   45:  file.close();
         -:   46:
-        4:   47:  return 0;
-       10:   48:}
+        6:   47:  return 0;
+       12:   48:}
         -:   49:
-       10:   50:int game(const std::string &filename)
+       12:   50:int game(const std::string &filename)
         -:   51:{
-       10:   52:  if (valida_arquivo_entrada(filename) == -1)
+       12:   52:  if (valida_arquivo_entrada(filename) == -1)
         6:   53:    return -1;
         -:   54:
-        4:   55:  std::ifstream file(filename);
-        4:   56:  std::string linha, linhas;
+        6:   55:  std::ifstream file(filename);
+        6:   56:  std::string linha;
         -:   57:  int tabuleiro[8][8];
-        4:   58:  int j = 0;
-       36:   59:  while (getline(file, linha))
+        6:   58:  int j = 0;
+       54:   59:  while (getline(file, linha))
         -:   60:  {
-      288:   61:    for (int i = 0; i < 8; i++)
+      432:   61:    for (int i = 0; i < 8; i++)
         -:   62:    {
-      256:   63:      tabuleiro[i][j] = linha[i] - '0';
+      384:   63:      tabuleiro[i][j] = linha[i] - '0';
         -:   64:    }
-       32:   65:    j++;
+       48:   65:    j++;
         -:   66:  }
-        -:   67:
-        4:   68:  file.close();
-        -:   69:
-        4:   70:  int nao_solucao = 1;
-        4:   71:  int numRainhasLinha = 0; // Verifica rainhas na mesma linha
-       36:   72:  for (int i = 0; i < 8; i++)
-        -:   73:  {
-      288:   74:    for (int j = 0; j < 8; j++)
-        -:   75:    {
-      256:   76:      std::cout << tabuleiro[i][j];
-      256:   77:      if (tabuleiro[i][j] == 1)
-       32:   78:        numRainhasLinha++;
-        -:   79:
-      256:   80:      if (numRainhasLinha > 1)
-        4:   81:        nao_solucao = 0;
-        -:   82:    }
-       32:   83:    numRainhasLinha = 0;
-        -:   84:  }
-        -:   85:
-        4:   86:  std::cout << std::endl;
-        -:   87:
-        4:   88:  int numRainhasColuna = 0; // verifica rainha na mesma coluna
-       36:   89:  for (int i = 0; i < 8; i++)
-        -:   90:  {
-      288:   91:    for (int j = i; j <= i + 7 * 8;)
-        -:   92:    {
-      256:   93:      if (tabuleiro[i][j] == 1)
-       20:   94:        numRainhasColuna++;
+        6:   67:  file.close();
+        -:   68:
+        6:   69:  int nao_solucao = 1;
+        6:   70:  int numRainhasLinha = 0; // Verifica rainhas na mesma linha
+       54:   71:  for (int i = 0; i < 8; i++)
+        -:   72:  {
+      432:   73:    for (int j = 0; j < 8; j++)
+        -:   74:    {
+      384:   75:      std::cout << tabuleiro[i][j];
+      384:   76:      if (tabuleiro[i][j] == 1)
+       48:   77:        numRainhasLinha++;
+        -:   78:
+      384:   79:      if (numRainhasLinha > 1)
+       17:   80:        nao_solucao = 0;
+        -:   81:    }
+       48:   82:    numRainhasLinha = 0;
+        -:   83:  }
+        -:   84:
+        6:   85:  int numRainhasColuna = 0; // verifica rainha na mesma coluna
+       54:   86:  for (int i = 0; i < 8; i++)
+        -:   87:  {
+      432:   88:    for (int j = i; j <= i + 7 * 8;)
+        -:   89:    {
+      384:   90:      if (tabuleiro[i][j] == 1)
+       29:   91:        numRainhasColuna++;
+        -:   92:
+      384:   93:      if (numRainhasColuna > 1)
+        1:   94:        nao_solucao = 0;
         -:   95:
-      256:   96:      if (numRainhasColuna > 1)
-        1:   97:        nao_solucao = 0;
-        -:   98:
-      256:   99:      j += 8;
-        -:  100:    }
-       32:  101:    numRainhasColuna = 0;
-        -:  102:  }
+      384:   96:      j += 8;
+        -:   97:    }
+       48:   98:    numRainhasColuna = 0;
+        -:   99:  }
+        -:  100:
+        6:  101:  return nao_solucao;
+        6:  102:}
         -:  103:
-        4:  104:  return nao_solucao;
-        4:  105:}
-        -:  106:
-       10:  107:int rainhas(const std::string &filename)
-        -:  108:{
-       10:  109:  int valida_game = game(filename);
-        -:  110:
-       10:  111:  return valida_game;
-        -:  112:}
+       12:  104:int rainhas(const std::string &filename)
+        -:  105:{
+       12:  106:  int valida_game = game(filename);
+        -:  107:
+       12:  108:  return valida_game;
+        -:  109:}
