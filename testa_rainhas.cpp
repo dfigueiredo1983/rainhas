@@ -30,8 +30,12 @@ TEST_CASE("Arquivos de entrada tem rainhas na mesma coluna", "[rainhas]")
     REQUIRE(rainhas("tabuleiros/rainhas_mesma_coluna_2.txt") == 0);
 }
 
-// TEST_CASE("Arquivos de entrada tem rainhas na mesma diagonal principal", "[rainhas]")
-// {
-//     REQUIRE(rainhas("tabuleiros/rainhas_diagonal_principal_1.txt") == 0);
-//     // REQUIRE(rainhas("tabuleiros/rainhas_diagonal_principal_2.txt") == 0);
-// }
+TEST_CASE("Arquivos de entrada tem rainhas na mesma diagonal principal", "[rainhas]")
+{
+    REQUIRE(rainhas("tabuleiros/rainhas_diagonal_principal_1.txt") == 0);
+    REQUIRE(rainhas("tabuleiros/rainhas_diagonal_principal_2.txt") == 0);
+    REQUIRE(rainhas("tabuleiros/rainhas_diagonal_principal_3.txt") == 0);
+    REQUIRE(rainhas("tabuleiros/rainhas_diagonal_principal_4.txt") == 0);
+    REQUIRE(rainhas("tabuleiros/rainhas_diagonal_principal_5.txt") == 0);
+    REQUIRE(rainhas("tabuleiros/rainhas_diagonal_principal_6.txt") == 0);
+}

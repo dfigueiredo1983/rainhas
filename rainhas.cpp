@@ -60,7 +60,7 @@ int game(const std::string &filename)
   {
     for (int i = 0; i < 8; i++)
     {
-      tabuleiro[i][j] = linha[i] - '0';
+      tabuleiro[j][i] = linha[i] - '0';
     }
     j++;
   }
@@ -72,7 +72,6 @@ int game(const std::string &filename)
   {
     for (int j = 0; j < 8; j++)
     {
-      std::cout << tabuleiro[i][j];
       if (tabuleiro[i][j] == 1)
         numRainhasLinha++;
 
@@ -103,16 +102,20 @@ int game(const std::string &filename)
   {
     for (int j = 0; j < 8; j++)
     {
-      if (tabuleiro[i][j] == 1)
+      if (tabuleiro[i][j] == 1) // (0,1), (0,2), (0,3), ... (6,7)
       {
-        if (i == j) // (0,0), (1,1) ....
+        for (int n = i + 1, m = j + 1; m < 8; n++, m++)
         {
-          for (int n = i; n < 8; n++)
+          if (tabuleiro[n][m] == 1)
           {
-            if (tabuleiro[n][n] == tabuleiro[i][j])
-            {
-              std::cout << "Duas rainhas na mesma diagonal" << std::endl;
-            }
+            nao_solucao = 0;
+          }
+        }
+        for (int n = i + 1, m = j - 1; m >= 0 && n < 8; n++, m--)
+        {
+          if (tabuleiro[n][m] == 1)
+          {
+            nao_solucao = 0;
           }
         }
       }
