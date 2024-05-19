@@ -67,42 +67,35 @@ int game(const std::string &filename)
   file.close();
 
   int nao_solucao = 1;
-  int numRainhasLinha = 0; // Verifica rainhas na mesma linha
-  for (int i = 0; i < 8; i++)
-  {
-    for (int j = 0; j < 8; j++)
-    {
-      if (tabuleiro[i][j] == 1)
-        numRainhasLinha++;
-
-      if (numRainhasLinha > 1)
-        nao_solucao = 0;
-    }
-    numRainhasLinha = 0;
-  }
-
-  int numRainhasColuna = 0; // verifica rainha na mesma coluna
-  for (int i = 0; i < 8; i++)
-  {
-    for (int j = i; j <= i + 7 * 8;)
-    {
-      if (tabuleiro[i][j] == 1)
-        numRainhasColuna++;
-
-      if (numRainhasColuna > 1)
-        nao_solucao = 0;
-
-      j += 8;
-    }
-    numRainhasColuna = 0;
-  }
 
   // rainhas na mesma diagonal
   for (int i = 0; i < 8; i++)
   {
     for (int j = 0; j < 8; j++)
     {
-      if (tabuleiro[i][j] == 1) // (0,1), (0,2), (0,3), ... (6,7)
+      int numRainhasLinha = 0; // Verifica rainhas na mesma linha
+      for (int n = i + 1; n < 8; n++)
+      {
+        if (tabuleiro[n][j] == 1)
+          numRainhasLinha++;
+
+        if (numRainhasLinha > 1)
+          nao_solucao = 0;
+      }
+      numRainhasLinha = 0;
+
+      int numRainhasColuna = 0; // verifica rainha na mesma coluna
+      for (int m = j + 1; m < 8; m++)
+      {
+        if (tabuleiro[i][m] == 1)
+          numRainhasColuna++;
+
+        if (numRainhasColuna > 1)
+          nao_solucao = 0;
+      }
+      numRainhasColuna = 0;
+
+      if (tabuleiro[i][j] == 1) // (0,1), (1,2), (3,2), ... (6,7)
       {
         for (int n = i + 1, m = j + 1; m < 8; n++, m++)
         {
@@ -111,7 +104,7 @@ int game(const std::string &filename)
             nao_solucao = 0;
           }
         }
-        for (int n = i + 1, m = j - 1; m >= 0 && n < 8; n++, m--)
+        for (int n = i + 1, m = j - 1; m >= 0 && n < 8; n++, m--) // (0,5), (1,4), (2,3), ... (5,0)
         {
           if (tabuleiro[n][m] == 1)
           {
