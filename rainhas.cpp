@@ -7,6 +7,8 @@
 #include <iostream>
 #include <vector>
 #include <sstream>
+#include <cerrno>
+#include <string.h>
 
 int valida_arquivo_entrada(const std::string &filename)
 {
@@ -66,55 +68,78 @@ int game(const std::string &filename)
   }
   file.close();
 
-  int nao_solucao = 1;
+  std::string filenameString = filename;
+  filenameString = filenameString.erase(0, 11);
+  std::string arquivoTeste = "ataques/ataques - " + filenameString;
+  const char *nameFile = arquivoTeste.c_str();
 
-  // rainhas na mesma diagonal
+  std::ofstream ataques;
+  ataques.open(nameFile, std::ios::out);
+
+  int nao_solucao = 1;
   for (int i = 0; i < 8; i++)
   {
     for (int j = 0; j < 8; j++)
     {
-      int numRainhasLinha = 0; // Verifica rainhas na mesma linha
-      for (int n = i + 1; n < 8; n++)
+      if (tabuleiro[i][j] == 1)
       {
-        if (tabuleiro[n][j] == 1)
-          numRainhasLinha++;
-
-        if (numRainhasLinha > 1)
-          nao_solucao = 0;
-      }
-      numRainhasLinha = 0;
-
-      int numRainhasColuna = 0; // verifica rainha na mesma coluna
-      for (int m = j + 1; m < 8; m++)
-      {
-        if (tabuleiro[i][m] == 1)
-          numRainhasColuna++;
-
-        if (numRainhasColuna > 1)
-          nao_solucao = 0;
-      }
-      numRainhasColuna = 0;
-
-      if (tabuleiro[i][j] == 1) // (0,1), (1,2), (3,2), ... (6,7)
-      {
-        for (int n = i + 1, m = j + 1; m < 8; n++, m++)
+        int numRainhasLinha = 0; // Verifica rainhas na mesma linha
+        for (int m = j + 1; m < 8; m++)
         {
-          if (tabuleiro[n][m] == 1)
+          if (tabuleiro[i][m] == 1)
+            numRainhasLinha++;
+
+          if (numRainhasLinha > 0)
           {
+            ataques << i << ", " << j << " - " << i << ", " << m << std::endl;
+            tabuleiro[i][j] = 0;
             nao_solucao = 0;
+            break;
           }
         }
-        for (int n = i + 1, m = j - 1; m >= 0 && n < 8; n++, m--) // (0,5), (1,4), (2,3), ... (5,0)
+        numRainhasLinha = 0;
+
+        int numRainhasColuna = 0; // verifica rainha na mesma coluna
+        for (int n = i + 1; n < 8; n++)
+        {
+          if (tabuleiro[n][j] == 1)
+            numRainhasColuna++;
+
+          if (numRainhasColuna > 1)
+          {
+            ataques << i << ", " << j << " - " << n << ", " << j << std::endl;
+            tabuleiro[i][j] = 0;
+            nao_solucao = 0;
+            break;
+          }
+        }
+        numRainhasColuna = 0;
+
+        for (int n = i + 1, m = j + 1; m < 8; n++, m++) // (0,1), (1,2), (3,2), ... (6,7) -  Diagonal principal
         {
           if (tabuleiro[n][m] == 1)
           {
+            ataques << i << ", " << j << " - " << n << ", " << m << std::endl;
+            tabuleiro[i][j] = 0;
             nao_solucao = 0;
+            break;
+          }
+        }
+        for (int n = i + 1, m = j - 1; m >= 0 && n < 8; n++, m--) // (0,5), (1,4), (2,3), ... (5,0) - Diagonal secundária
+        {
+          if (tabuleiro[n][m] == 1)
+          {
+            ataques << i << ", " << j << " - " << n << ", " << m << std::endl;
+            tabuleiro[i][j] = 0;
+            nao_solucao = 0;
+            break;
           }
         }
       }
     }
   }
 
+  ataques.close();
   return nao_solucao;
 }
 
