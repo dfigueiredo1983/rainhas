@@ -68,13 +68,7 @@ int game(const std::string &filename)
   }
   file.close();
 
-  std::string filenameString = filename;
-  filenameString = filenameString.erase(0, 11);
-  std::string arquivoTeste = "ataques/ataques - " + filenameString;
-  const char *nameFile = arquivoTeste.c_str();
-
-  std::ofstream ataques;
-  ataques.open(nameFile, std::ios::out);
+  std::ostringstream oss;
 
   int nao_solucao = 1;
   for (int i = 0; i < 8; i++)
@@ -91,9 +85,10 @@ int game(const std::string &filename)
 
           if (numRainhasLinha > 0)
           {
-            ataques << i << ", " << j << " - " << i << ", " << m << std::endl;
+            oss << i << ", " << j << " - " << i << ", " << m << '\n';
             tabuleiro[i][j] = 0;
             nao_solucao = 0;
+            j++;
             break;
           }
         }
@@ -105,11 +100,12 @@ int game(const std::string &filename)
           if (tabuleiro[n][j] == 1)
             numRainhasColuna++;
 
-          if (numRainhasColuna > 1)
+          if (numRainhasColuna > 0)
           {
-            ataques << i << ", " << j << " - " << n << ", " << j << std::endl;
+            oss << i << ", " << j << " - " << n << ", " << j << '\n';
             tabuleiro[i][j] = 0;
             nao_solucao = 0;
+            i++;
             break;
           }
         }
@@ -119,7 +115,7 @@ int game(const std::string &filename)
         {
           if (tabuleiro[n][m] == 1)
           {
-            ataques << i << ", " << j << " - " << n << ", " << m << std::endl;
+            oss << i << ", " << j << " - " << n << ", " << m << '\n';
             tabuleiro[i][j] = 0;
             nao_solucao = 0;
             break;
@@ -129,7 +125,7 @@ int game(const std::string &filename)
         {
           if (tabuleiro[n][m] == 1)
           {
-            ataques << i << ", " << j << " - " << n << ", " << m << std::endl;
+            oss << i << ", " << j << " - " << n << ", " << m << '\n';
             tabuleiro[i][j] = 0;
             nao_solucao = 0;
             break;
@@ -139,7 +135,20 @@ int game(const std::string &filename)
     }
   }
 
-  ataques.close();
+  if (nao_solucao == 0)
+  {
+    std::string result = oss.str();
+
+    std::string filenameString = filename;
+    filenameString = filenameString.erase(0, 11);
+    std::string arquivoTeste = "ataques/ataques - " + filenameString;
+    const char *nameFile = arquivoTeste.c_str();
+
+    std::ofstream ataques;
+    ataques.open(nameFile, std::ios::out);
+    ataques << result;
+    ataques.close();
+  }
   return nao_solucao;
 }
 
