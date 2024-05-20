@@ -1,5 +1,6 @@
 Linha 1, 1 - 1, 2
+Linha 1, 2 - 1, 5
 Linha 4, 2 - 4, 6
-Coluna: 1, 5 - 2, 5
-Diagonal secundaria: 0, 7 - 2, 5
-Diagonal secundaria: 2, 5 - 7, 0
+1, 5 - 2, 5
+0, 7 - 2, 5
+2, 5 - 7, 0

@@ -1,3 +1,3 @@
-Coluna: 1, 2 - 4, 2
-Coluna: 2, 6 - 7, 6
-Diagonal principal: 3, 0 - 6, 3
+1, 2 - 4, 2
+2, 6 - 7, 6
+3, 0 - 6, 3

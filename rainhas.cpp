@@ -10,6 +10,19 @@
 #include <cerrno>
 #include <string.h>
 
+/**
+ * @brief Esta é uma breve descrição do projeto das 8 Rainhas.
+ *
+ * O projeto consiste em verificar um tabuleiro com 8 linhas, 8 colunas e 8 Rainhas.
+ * As rainhas devem ser dispostas no tabuleiro de forma que ela não seja atacada por outras rainhas já presentes no tabuleiro
+ * Os movimentos que uma rainha pode fazer são:
+ *     movimento para as laterais, tanto para a direita quanto para a esquerda
+ *     movimento para cima e para baixo
+ *     movimento nas diagonais a direita ou a esquerda, tanto de baixo para cima, quanto de cima para baixo
+ * Caso uma rainha seja coloca em uma posição onde outra rainha já disposta no tabuleiro possa atacá-la, então
+ * devemos salvar o movimento de ataque e eliminar a rainha atacada do tabuleiro
+ */
+
 int valida_arquivo_entrada(const std::string &filename)
 {
   std::ifstream file(filename);
@@ -88,7 +101,6 @@ int game(const std::string &filename)
             oss << "Linha " << i << ", " << j << " - " << i << ", " << m << '\n';
             tabuleiro[i][j] = 0;
             nao_solucao = 0;
-            j++;
             break;
           }
         }
@@ -111,10 +123,9 @@ int game(const std::string &filename)
 
           if (numRainhasColuna > 0)
           {
-            oss << "Coluna: " << i << ", " << j << " - " << n << ", " << j << '\n';
+            oss << i << ", " << j << " - " << n << ", " << j << '\n';
             tabuleiro[i][j] = 0;
             nao_solucao = 0;
-            i++;
             break;
           }
         }
@@ -133,7 +144,7 @@ int game(const std::string &filename)
         {
           if (tabuleiro[n][m] == 1)
           {
-            oss << "Diagonal principal: " << i << ", " << j << " - " << n << ", " << m << '\n';
+            oss << i << ", " << j << " - " << n << ", " << m << '\n';
             tabuleiro[i][j] = 0;
             nao_solucao = 0;
             break;
@@ -143,7 +154,7 @@ int game(const std::string &filename)
         {
           if (tabuleiro[n][m] == 1)
           {
-            oss << "Diagonal secundaria: " << i << ", " << j << " - " << n << ", " << m << '\n';
+            oss << i << ", " << j << " - " << n << ", " << m << '\n';
             tabuleiro[i][j] = 0;
             nao_solucao = 0;
             break;
@@ -153,22 +164,45 @@ int game(const std::string &filename)
     }
   }
 
-  if (nao_solucao == 0)
+  std::string result = oss.str();
+  std::string fileNameString(filename);
+
+  std::string arquivoTeste = "ataques/ataques - " + fileNameString.erase(0, 11);
+  const char *nameFile = arquivoTeste.c_str();
+
+  if (nao_solucao == 1)
   {
-    std::string result = oss.str();
-
-    std::string filenameString = filename;
-    filenameString = filenameString.erase(0, 11);
-    std::string arquivoTeste = "ataques/ataques - " + filenameString;
-    const char *nameFile = arquivoTeste.c_str();
-
+    return 1;
+  }
+  else
+  {
     std::ofstream ataques;
     ataques.open(nameFile, std::ios::out);
+    std::string result = oss.str();
     ataques << result;
     ataques.close();
+
+    return 0;
   }
-  return nao_solucao;
 }
+
+/**
+ * @brief Função principal.
+ *
+ * Esta função recebe um parâmetro do tipo string, que é o nome do arquivo com o
+ * tabuleiro a ser analisado
+ *
+ * Ele irá retornar:
+ *      1 - caso o arquivo seja solução para o problema
+ *      0 - caso o arquivo não seja solução para o problema e nesse caso
+ *          um arquivo contendo os ataques das rainhas
+ *     -1 - caso não seja solução, por exemplo um tabuleiro que não é 8x8,
+ *          com caracteres inválidos, com mais ou menos de 8 rainhas
+ *
+ * @param filename - nome do arquivo a ser analisado
+ *
+ * @return valida_game
+ */
 
 int rainhas(const std::string &filename)
 {

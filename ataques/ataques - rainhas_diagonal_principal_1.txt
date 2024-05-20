@@ -1,4 +1,4 @@
-Diagonal principal: 0, 0 - 1, 1
-Diagonal principal: 1, 1 - 7, 7
-Diagonal secundaria: 3, 6 - 5, 4
-Diagonal principal: 5, 4 - 6, 5
+0, 0 - 1, 1
+1, 1 - 7, 7
+3, 6 - 5, 4
+5, 4 - 6, 5
