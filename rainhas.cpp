@@ -85,7 +85,7 @@ int game(const std::string &filename)
 
           if (numRainhasLinha > 0)
           {
-            oss << i << ", " << j << " - " << i << ", " << m << '\n';
+            oss << "Linha " << i << ", " << j << " - " << i << ", " << m << '\n';
             tabuleiro[i][j] = 0;
             nao_solucao = 0;
             j++;
@@ -93,7 +93,16 @@ int game(const std::string &filename)
           }
         }
         numRainhasLinha = 0;
+      }
+    }
+  }
 
+  for (int i = 0; i < 8; i++)
+  {
+    for (int j = 0; j < 8; j++)
+    {
+      if (tabuleiro[i][j] == 1)
+      {
         int numRainhasColuna = 0; // verifica rainha na mesma coluna
         for (int n = i + 1; n < 8; n++)
         {
@@ -102,7 +111,7 @@ int game(const std::string &filename)
 
           if (numRainhasColuna > 0)
           {
-            oss << i << ", " << j << " - " << n << ", " << j << '\n';
+            oss << "Coluna: " << i << ", " << j << " - " << n << ", " << j << '\n';
             tabuleiro[i][j] = 0;
             nao_solucao = 0;
             i++;
@@ -110,12 +119,21 @@ int game(const std::string &filename)
           }
         }
         numRainhasColuna = 0;
+      }
+    }
+  }
 
-        for (int n = i + 1, m = j + 1; m < 8; n++, m++) // (0,1), (1,2), (3,2), ... (6,7) -  Diagonal principal
+  for (int i = 0; i < 8; i++)
+  {
+    for (int j = 0; j < 8; j++)
+    {
+      if (tabuleiro[i][j] == 1)
+      {
+        for (int n = i + 1, m = j + 1; n < 8 && m < 8; n++, m++) // (0,1), (1,2), (3,2), ... (6,7) -  Diagonal principal
         {
           if (tabuleiro[n][m] == 1)
           {
-            oss << i << ", " << j << " - " << n << ", " << m << '\n';
+            oss << "Diagonal principal: " << i << ", " << j << " - " << n << ", " << m << '\n';
             tabuleiro[i][j] = 0;
             nao_solucao = 0;
             break;
@@ -125,7 +143,7 @@ int game(const std::string &filename)
         {
           if (tabuleiro[n][m] == 1)
           {
-            oss << i << ", " << j << " - " << n << ", " << m << '\n';
+            oss << "Diagonal secundaria: " << i << ", " << j << " - " << n << ", " << m << '\n';
             tabuleiro[i][j] = 0;
             nao_solucao = 0;
             break;

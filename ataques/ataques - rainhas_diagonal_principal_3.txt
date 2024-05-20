@@ -1,5 +1,4 @@
-0, 1 - 2, 3
-1, 4 - 5, 4
-2, 4 - 4, 2
-5, 4 - 6, 5
-6, 5 - 7, 6
+Coluna: 1, 4 - 5, 4
+Diagonal principal: 0, 1 - 2, 3
+Diagonal principal: 5, 4 - 6, 5
+Diagonal principal: 6, 5 - 7, 6
