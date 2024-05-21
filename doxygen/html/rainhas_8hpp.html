@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
 <meta name="generator" content="Doxygen 1.9.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>8 Rainhas: rainhas.cpp Source File</title>
+<title>8 Rainhas: rainhas.hpp File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -45,7 +45,6 @@ $(function() {
 });
 /* @license-end */</script>
 <div id="main-nav"></div>
-</div><!-- top -->
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -60,64 +59,58 @@ $(function() {
 </iframe>
 </div>
 
+</div><!-- top -->
 <div class="header">
+  <div class="summary">
+<a href="#func-members">Functions</a>  </div>
   <div class="headertitle">
-<div class="title">rainhas.cpp</div>  </div>
+<div class="title">rainhas.hpp File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<a href="rainhas_8cpp.html">Go to the documentation of this file.</a><div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="comment">// Copyright 2024 Daniel do Carmo Figueiredo</span></div>
-<div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160; </div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="preprocessor">#include &quot;<a class="code" href="rainhas_8hpp.html">rainhas.hpp</a>&quot;</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="preprocessor">#include &lt;cctype&gt;</span></div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="preprocessor">#include &lt;fstream&gt;</span></div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;<span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor">#include &lt;sstream&gt;</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor">#include &lt;cerrno&gt;</span></div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#include &lt;string.h&gt;</span></div>
-<div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160; </div>
-<div class="line"><a name="l00026"></a><span class="lineno"><a class="line" href="rainhas_8cpp.html#aadf7edf7e5e76fa153c68848cf07cfcf">   26</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="rainhas_8cpp.html#aadf7edf7e5e76fa153c68848cf07cfcf">valida_arquivo_entrada</a>(<span class="keyword">const</span> std::string &amp;filename)</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  std::ifstream file(filename);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordflow">if</span> (!file)</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordtype">char</span> caractere;</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keywordtype">int</span> numColunas = 0;</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordtype">int</span> numLinhas = 0;</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordflow">while</span> (file.get(caractere))</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  {</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span> (isalpha(caractere))</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;      <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span> (isdigit(caractere) &amp;&amp; !(caractere == <span class="charliteral">&#39;0&#39;</span> || caractere == <span class="charliteral">&#39;1&#39;</span>))</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">if</span> (caractere == <span class="charliteral">&#39;\n&#39;</span>)</div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="keywordflow">if</span> (numColunas != 8)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      numColunas = 0;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      numLinhas++;</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">else</span></div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      ++numColunas;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  }</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordflow">if</span> (numLinhas != 7)</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> -1;</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  file.close();</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordflow">return</span> 0;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160; </div>
-<div class="line"><a name="l00065"></a><span class="lineno"><a class="line" href="rainhas_8cpp.html#a7625d9d3f1c125576fd618789b0ab1de">   65</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="rainhas_8cpp.html#a7625d9d3f1c125576fd618789b0ab1de">game</a>(<span class="keyword">const</span> std::string &amp;filename)</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
+<div class="textblock"><code>#include &lt;string&gt;</code><br />
+</div><div class="textblock"><div class="dynheader">
+Include dependency graph for rainhas.hpp:</div>
+<div class="dyncontent">
+<div class="center"><img src="rainhas_8hpp__incl.png" border="0" usemap="#arainhas_8hpp" alt=""/></div>
+</div>
+</div><div class="textblock"><div class="dynheader">
+This graph shows which files directly or indirectly include this file:</div>
+<div class="dyncontent">
+<div class="center"><img src="rainhas_8hpp__dep__incl.png" border="0" usemap="#arainhas_8hppdep" alt=""/></div>
+</div>
+</div>
+<p><a href="rainhas_8hpp_source.html">Go to the source code of this file.</a></p>
+<table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="func-members"></a>
+Functions</h2></td></tr>
+<tr class="memitem:a964847c274ae3478690310a2361d4689"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rainhas_8hpp.html#a964847c274ae3478690310a2361d4689">rainhas</a> (const std::string &amp;filename)</td></tr>
+<tr class="memdesc:a964847c274ae3478690310a2361d4689"><td class="mdescLeft">&#160;</td><td class="mdescRight">Função principal.  <a href="rainhas_8hpp.html#a964847c274ae3478690310a2361d4689">More...</a><br /></td></tr>
+<tr class="separator:a964847c274ae3478690310a2361d4689"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aadf7edf7e5e76fa153c68848cf07cfcf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rainhas_8hpp.html#aadf7edf7e5e76fa153c68848cf07cfcf">valida_arquivo_entrada</a> (const std::string &amp;filename)</td></tr>
+<tr class="memdesc:aadf7edf7e5e76fa153c68848cf07cfcf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Esta é uma breve descrição do projeto das 8 Rainhas.  <a href="rainhas_8hpp.html#aadf7edf7e5e76fa153c68848cf07cfcf">More...</a><br /></td></tr>
+<tr class="separator:aadf7edf7e5e76fa153c68848cf07cfcf"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7625d9d3f1c125576fd618789b0ab1de"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="rainhas_8hpp.html#a7625d9d3f1c125576fd618789b0ab1de">game</a> (const std::string &amp;filename)</td></tr>
+<tr class="separator:a7625d9d3f1c125576fd618789b0ab1de"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table>
+<h2 class="groupheader">Function Documentation</h2>
+<a id="a7625d9d3f1c125576fd618789b0ab1de"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7625d9d3f1c125576fd618789b0ab1de">&#9670;&nbsp;</a></span>game()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int game </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="rainhas_8cpp_source.html#l00065">65</a> of file <a class="el" href="rainhas_8cpp_source.html">rainhas.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;{</div>
 <div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;  <span class="keywordflow">if</span> (<a class="code" href="rainhas_8cpp.html#aadf7edf7e5e76fa153c68848cf07cfcf">valida_arquivo_entrada</a>(filename) == -1)</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="keywordflow">return</span> -1;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160; </div>
@@ -239,18 +232,108 @@ $(function() {
 <div class="line"><a name="l00185"></a><span class="lineno">  185</span>&#160;    <span class="keywordflow">return</span> 0;</div>
 <div class="line"><a name="l00186"></a><span class="lineno">  186</span>&#160;  }</div>
 <div class="line"><a name="l00187"></a><span class="lineno">  187</span>&#160;}</div>
-<div class="line"><a name="l00188"></a><span class="lineno">  188</span>&#160; </div>
-<div class="line"><a name="l00207"></a><span class="lineno"><a class="line" href="rainhas_8cpp.html#a964847c274ae3478690310a2361d4689">  207</a></span>&#160;<span class="keywordtype">int</span> <a class="code" href="rainhas_8cpp.html#a964847c274ae3478690310a2361d4689">rainhas</a>(<span class="keyword">const</span> std::string &amp;filename)</div>
-<div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;{</div>
+<div class="ttc" id="arainhas_8cpp_html_aadf7edf7e5e76fa153c68848cf07cfcf"><div class="ttname"><a href="rainhas_8cpp.html#aadf7edf7e5e76fa153c68848cf07cfcf">valida_arquivo_entrada</a></div><div class="ttdeci">int valida_arquivo_entrada(const std::string &amp;filename)</div><div class="ttdoc">Esta é uma breve descrição do projeto das 8 Rainhas.</div><div class="ttdef"><b>Definition:</b> <a href="rainhas_8cpp_source.html#l00026">rainhas.cpp:26</a></div></div>
+</div><!-- fragment -->
+</div>
+</div>
+<a id="a964847c274ae3478690310a2361d4689"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a964847c274ae3478690310a2361d4689">&#9670;&nbsp;</a></span>rainhas()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int rainhas </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Função principal. </p>
+<p>Esta função recebe um parâmetro do tipo string, que é o nome do arquivo com o tabuleiro a ser analisado</p>
+<p>Ele irá retornar: 1 - caso o arquivo seja solução para o problema 0 - caso o arquivo não seja solução para o problema e nesse caso um arquivo contendo os ataques das rainhas -1 - caso não seja solução, por exemplo um tabuleiro que não é 8x8, com caracteres inválidos, com mais ou menos de 8 rainhas</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>- nome do arquivo a ser analisado</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>valida_game </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="rainhas_8cpp_source.html#l00207">207</a> of file <a class="el" href="rainhas_8cpp_source.html">rainhas.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00208"></a><span class="lineno">  208</span>&#160;{</div>
 <div class="line"><a name="l00209"></a><span class="lineno">  209</span>&#160;  <span class="keywordtype">int</span> valida_game = <a class="code" href="rainhas_8cpp.html#a7625d9d3f1c125576fd618789b0ab1de">game</a>(filename);</div>
 <div class="line"><a name="l00210"></a><span class="lineno">  210</span>&#160; </div>
 <div class="line"><a name="l00211"></a><span class="lineno">  211</span>&#160;  <span class="keywordflow">return</span> valida_game;</div>
 <div class="line"><a name="l00212"></a><span class="lineno">  212</span>&#160;}</div>
 <div class="ttc" id="arainhas_8cpp_html_a7625d9d3f1c125576fd618789b0ab1de"><div class="ttname"><a href="rainhas_8cpp.html#a7625d9d3f1c125576fd618789b0ab1de">game</a></div><div class="ttdeci">int game(const std::string &amp;filename)</div><div class="ttdef"><b>Definition:</b> <a href="rainhas_8cpp_source.html#l00065">rainhas.cpp:65</a></div></div>
-<div class="ttc" id="arainhas_8cpp_html_a964847c274ae3478690310a2361d4689"><div class="ttname"><a href="rainhas_8cpp.html#a964847c274ae3478690310a2361d4689">rainhas</a></div><div class="ttdeci">int rainhas(const std::string &amp;filename)</div><div class="ttdoc">Função principal.</div><div class="ttdef"><b>Definition:</b> <a href="rainhas_8cpp_source.html#l00207">rainhas.cpp:207</a></div></div>
-<div class="ttc" id="arainhas_8cpp_html_aadf7edf7e5e76fa153c68848cf07cfcf"><div class="ttname"><a href="rainhas_8cpp.html#aadf7edf7e5e76fa153c68848cf07cfcf">valida_arquivo_entrada</a></div><div class="ttdeci">int valida_arquivo_entrada(const std::string &amp;filename)</div><div class="ttdoc">Esta é uma breve descrição do projeto das 8 Rainhas.</div><div class="ttdef"><b>Definition:</b> <a href="rainhas_8cpp_source.html#l00026">rainhas.cpp:26</a></div></div>
-<div class="ttc" id="arainhas_8hpp_html"><div class="ttname"><a href="rainhas_8hpp.html">rainhas.hpp</a></div></div>
-</div><!-- fragment --></div><!-- contents -->
+</div><!-- fragment -->
+</div>
+</div>
+<a id="aadf7edf7e5e76fa153c68848cf07cfcf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aadf7edf7e5e76fa153c68848cf07cfcf">&#9670;&nbsp;</a></span>valida_arquivo_entrada()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int valida_arquivo_entrada </td>
+          <td>(</td>
+          <td class="paramtype">const std::string &amp;&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Esta é uma breve descrição do projeto das 8 Rainhas. </p>
+<p>O projeto consiste em verificar um tabuleiro com 8 linhas, 8 colunas e 8 Rainhas. As rainhas devem ser dispostas no tabuleiro de forma que ela não seja atacada por outras rainhas já presentes no tabuleiro Os movimentos que uma rainha pode fazer são: movimento para as laterais, tanto para a direita quanto para a esquerda movimento para cima e para baixo movimento nas diagonais a direita ou a esquerda, tanto de baixo para cima, quanto de cima para baixo Caso uma rainha seja coloca em uma posição onde outra rainha já disposta no tabuleiro possa atacá-la, então devemos salvar o movimento de ataque e eliminar a rainha atacada do tabuleiro </p>
+
+<p class="definition">Definition at line <a class="el" href="rainhas_8cpp_source.html#l00026">26</a> of file <a class="el" href="rainhas_8cpp_source.html">rainhas.cpp</a>.</p>
+<div class="fragment"><div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;{</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;  std::ifstream file(filename);</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;  <span class="keywordflow">if</span> (!file)</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;  <span class="keywordtype">char</span> caractere;</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;  <span class="keywordtype">int</span> numColunas = 0;</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;  <span class="keywordtype">int</span> numLinhas = 0;</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;  <span class="keywordflow">while</span> (file.get(caractere))</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;  {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    <span class="keywordflow">if</span> (isalpha(caractere))</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;      <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160; </div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span> (isdigit(caractere) &amp;&amp; !(caractere == <span class="charliteral">&#39;0&#39;</span> || caractere == <span class="charliteral">&#39;1&#39;</span>))</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;      <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160; </div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;    <span class="keywordflow">if</span> (caractere == <span class="charliteral">&#39;\n&#39;</span>)</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    {</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;      <span class="keywordflow">if</span> (numColunas != 8)</div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;        <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160; </div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;      numColunas = 0;</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;      numLinhas++;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    }</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordflow">else</span></div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    {</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;      ++numColunas;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;  }</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160; </div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;  <span class="keywordflow">if</span> (numLinhas != 7)</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">return</span> -1;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160; </div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;  file.close();</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;  <span class="keywordflow">return</span> 0;</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;}</div>
+</div><!-- fragment -->
+</div>
+</div>
+</div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
 Generated by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
